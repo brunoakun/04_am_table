@@ -1,0 +1,72 @@
+<div class="container">
+
+
+    <div class="col">
+        <mat-form-field appearance="outline">
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+        </mat-form-field>
+
+    </div>
+
+
+    <div class="container-flex">
+
+
+        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matTableExporter
+            #exporter="matTableExporter">
+
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by number">
+                    No.
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by text"> Name
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="weight">
+                <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol">
+                <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+
+        </table>
+
+        <button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx', {fileName:'table'})">Export
+            to
+            xlsx</button>
+        <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('csv')">Export To
+            csv</button>
+        <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('json')">Export To
+            json</button>
+        <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('txt')">Export To
+            txt</button>
+
+
+
+
+    </div>
+</div>
