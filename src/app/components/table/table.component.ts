@@ -2,6 +2,7 @@ import { ITabla } from './../../models/tabla';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -13,11 +14,15 @@ export class TableComponent implements OnInit {
 
   constructor() { }
 
-  
-  @ViewChild(MatSort) sort:any ;
+
+  @ViewChild(MatSort) sort: any;
+  @ViewChild(MatPaginator) paginator: any;
+
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+
   }
 
   elementData: ITabla[] = [
